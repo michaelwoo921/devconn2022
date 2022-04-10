@@ -12,7 +12,7 @@ const profileSchema = new mongoose.Schema({
   skills: { type: [String], required: true },
   bio: { type: String },
   githubusername: { type: String },
-  experiences: [
+  experience: [
     {
       title: { type: String, required: true },
       company: { type: String, required: true },
