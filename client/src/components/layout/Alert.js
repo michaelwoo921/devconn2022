@@ -1,8 +1,9 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Alert = () => {
   const alerts = useSelector((state) => state.alert);
+
   return (
     <section className="container">
       {alerts.map((alert) => (

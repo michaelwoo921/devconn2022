@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../actions/auth';
-import Dashboard from '../layout/Dashboard';
+import Dashboard from '../dashboard/Dashboard';
 
 const Login = () => {
   const dispatch = useDispatch();

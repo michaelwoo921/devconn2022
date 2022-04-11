@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
-import Dashboard from '../layout/Dashboard';
+import Dashboard from '../dashboard/Dashboard';
 
 const Register = () => {
   const dispatch = useDispatch();

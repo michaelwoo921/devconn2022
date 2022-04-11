@@ -1,7 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Dashboard from '../dashboard/Dashboard';
 
 const Landing = () => {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  if (isAuthenticated) {
+    return <Dashboard />;
+  }
   return (
     <section className="landing">
       <div className="dark-overlay">

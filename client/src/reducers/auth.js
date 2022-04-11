@@ -6,7 +6,7 @@ const initialState = {
   loading: true,
   user: null,
 };
-export default function (state = initialState, action) {
+export default function authReducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case actions.USER_LOADED:
@@ -19,6 +19,7 @@ export default function (state = initialState, action) {
     case actions.AUTH_ERROR:
     case actions.LOGIN_FAILED:
     case actions.LOG_OUT:
+    case actions.ACCOUNT_DELETED:
       localStorage.removeItem('token');
       return { ...state, token: null, isAuthenticated: false, loading: false };
     default:
