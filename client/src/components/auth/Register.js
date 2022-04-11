@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
+import Dashboard from '../layout/Dashboard';
 
 const Register = () => {
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,9 +26,12 @@ const Register = () => {
     if (password !== password2) {
       dispatch(setAlert('password do not match', 'danger', 1000));
     } else {
-      console.log(formData);
+      dispatch(register({ name, email, password }));
     }
   };
+  if (isAuthenticated) {
+    return <Dashboard />;
+  }
   return (
     <section className="container">
       <h1 className="large text-primary">Sign Up</h1>
@@ -38,7 +44,6 @@ const Register = () => {
             type="text"
             placeholder="Name"
             name="name"
-            required
             value={name}
             onChange={(e) => onChange(e)}
           />
@@ -61,7 +66,6 @@ const Register = () => {
             type="password"
             placeholder="Password"
             name="password"
-            minLength="6"
             value={password}
             onChange={(e) => onChange(e)}
           />
@@ -71,7 +75,6 @@ const Register = () => {
             type="password"
             placeholder="Confirm Password"
             name="password2"
-            minLength="6"
             value={password2}
             onChange={(e) => onChange(e)}
           />

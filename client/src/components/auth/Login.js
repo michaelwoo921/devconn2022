@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../actions/auth';
+import Dashboard from '../layout/Dashboard';
 
 const Login = () => {
+  const dispatch = useDispatch();
+
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const [formData, setFormData] = useState({ email: '', password: '' });
   const { email, password } = formData;
   const onChange = (e) => {
@@ -9,9 +15,11 @@ const Login = () => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    dispatch(login(email, password));
   };
-
+  if (isAuthenticated) {
+    return <Dashboard />;
+  }
   return (
     <section className="container">
       <div className="alert alert-danger">Invalid credentials</div>
