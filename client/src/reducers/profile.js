@@ -14,6 +14,10 @@ export default function profile(state = initialState, action) {
     case actions.GET_PROFILE:
     case actions.UPDATE_PROFILE:
       return { ...state, profile: payload, loading: false };
+    case actions.GET_PROFILES:
+      return { ...state, profiles: payload, loading: false };
+    case actions.GET_REPOS:
+      return { ...state, repos: payload, loading: false };
     case actions.PROFILE_ERROR:
       return { ...state, loading: false, error: payload };
     case actions.CLEAR_PROFILE:

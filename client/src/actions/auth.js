@@ -9,9 +9,10 @@ export const loadUser = () => async (dispatch) => {
   }
   try {
     const res = await axios.get('/api/auth');
+    console.log(res.data.user);
     dispatch({
       type: actions.USER_LOADED,
-      payload: res.data,
+      payload: res.data.user,
     });
   } catch (err) {
     dispatch({ type: actions.AUTH_ERROR });

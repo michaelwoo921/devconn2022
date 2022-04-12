@@ -15,6 +15,46 @@ export const getCurrentProfile = () => async (dispatch) => {
   }
 };
 
+export const getProfiles = () => async (dispatch) => {
+  dispatch({ type: actions.CLEAR_PROFILE });
+  try {
+    const res = await axios.get('/api/profile');
+    dispatch({ type: actions.GET_PROFILES, payload: res.data });
+  } catch (err) {
+    console.log('***', err.response);
+    dispatch({
+      type: actions.PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+export const getProfileById = (userid) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profile/user/${userid}`);
+    dispatch({ type: actions.GET_PROFILE, payload: res.data });
+  } catch (err) {
+    console.log('***', err.response);
+    dispatch({
+      type: actions.PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+export const getGithubRepos = (username) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profile/github/${username}`);
+    dispatch({ type: actions.GET_REPOS, payload: res.data });
+  } catch (err) {
+    console.log('***', err.response);
+    dispatch({
+      type: actions.PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
 export const createProfile =
   (formData, edit = false) =>
   async (dispatch) => {
